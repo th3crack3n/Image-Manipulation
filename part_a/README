@@ -1,0 +1,105 @@
+______          _           _     __           ___  
+| ___ \        (_)         | |   /  |         / _ \ 
+| |_/ / __ ___  _  ___  ___| |_  `| | ______ / /_\ \
+|  __/ '__/ _ \| |/ _ \/ __| __|  | | ______ |  _  |
+| |  | | | (_) | |  __/ (__| |_  _| |_       | | | |
+\_|  |_|  \___/| |\___|\___|\__| \___/       \_| |_/
+              _/ |                                
+             |__/                                
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+Name : Sean McCracken
+ISU ID : seanmcc
+
+This project was the first part of our first C programming
+assignment in Com S 229 at Iowa State University. The assignment
+was to build a C library containing data structures and 
+procedures for loading and storing uncompressed bitmap images,
+along with several executables that used the library to manipulate
+images stored in the custom file type SIMP. 
+
+
+CONTENTS
+----------------------------------------------------------
+makefile
+simp.h
+bw.c
+crop.c
+colorshift.c
+overlay.c
+
+
+SIMP.h
+----------------------------------------------------------
+This library contains several structures and functions for
+handling images.
+
+Images are stored through the use of two simple structures.
+The first structure is simp_pixel, which stores four char
+values. These represent the red, green, blue, and alpha values
+for a given pixel. The second structure is simp_image, which
+stores the width, height, and a simp_pixel array of length 
+width * height, to store all pixels.
+
+Functions are used to allow loading and storing of SIMP
+images. Using a buffer and the fread() function, bytes are
+read or written to a given file.  
+
+
+
+BW.c
+----------------------------------------------------------
+Usage: ./bw fileIn.simp fileOut.simp
+
+Converts an image to a grayscale version.
+
+
+
+CROP.c
+----------------------------------------------------------
+Usage: ./crop fileIn.simp fileOut.simp x_position
+   y_position width height
+
+Reduces the size of an image to a given width and height.
+The top-left corner of new image matches the position (x,y)
+of the original image. No pixels are modified.
+
+Assumptions made for this executable involve error checking
+for size of the cropped image. Any image that would exceed
+the right or bottom edge of the throws an error and lets the
+user know the amount of pixels the cropped edge has past
+the original edge.
+
+
+COLORSHIFT.c
+----------------------------------------------------------
+Usage: ./colorshift fileIn.simp fileOut.simp pattern
+
+Performs an artistic color shift on an image, given a
+distinct character pattern. Allowable shift patterns include: 
+RGB, GBR, BRG, RBG, BGR, GRB, RG, GR, RB, BR, GB, & BG. In
+these patterns, the color is shifted based on the character
+to its right, or wrapped around the end. In an example
+pattern RBG, the value for red is placed on blue, the value
+for blue is placed on green, and the value for green is
+placed on red.
+
+
+OVERLAY.c
+----------------------------------------------------------
+Usage: ./overlay fileInOne.simp fileInTwo.simp fileOut.simp 
+   x_position y_position
+
+Places an image on top of another image. The overlap begins
+at a specific position (x,y). The values of each pixel in
+the overlap area is determined by given functions that use
+the alpha value of each image to determine transparency or
+opacity.
+
+Assumptions made for this executable involve error checking   
+for size of the overlapped image. Any image that would exceed 
+the right or bottom edge of the throws an error and lets the 
+user know the amount of pixels the overlapped image has past 
+the original edge.

@@ -1,0 +1,85 @@
+______          _           _     __         ______ 
+| ___ \        (_)         | |   /  |        | ___ \
+| |_/ / __ ___  _  ___  ___| |_  `| | ______ | |_/ /
+|  __/ '__/ _ \| |/ _ \/ __| __|  | | ______ | ___ \
+| |  | | | (_) | |  __/ (__| |_  _| |_       | |_/ /
+\_|  |_|  \___/| |\___|\___|\__| \___/       \____/ 
+              _/ |                                
+             |__/                                                                       
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+Name : Sean McCracken
+ISU ID : seanmcc
+
+This project was the first second of our first C programming
+assignment in Com S 229 at Iowa State University. The assignment
+to utilize the structures and library functions from the first
+part of the project to create a simple meme generator. Overlaid
+text was given in the format of a bitmap font. All information
+regarding meme picture, text, and text location was specified in
+files of format MEM, FONT, or ACT. MEM files contain information
+relating to the specified meme, font, meme image location, and text
+location on the image. FONT files contain the font image location
+and character dimensions. ACT files contain the information required
+to actually create the meme, such as meme image, font type, and
+text values to use.
+ 
+
+CONTENTS
+----------------------------------------------------------
+makefile
+meme.c
+simp.h
+mem.h
+font.h
+act.h
+
+
+meme.c
+----------------------------------------------------------
+Usage: ./meme file.mem file.act
+
+Uses the specified mem file and act file to execute the
+creation of a meme. Makes calls to various libraries to
+parse and modify font and meme simp files to create a
+single file which is the desired meme.
+
+
+simp.h
+----------------------------------------------------------
+This library contains several structures and functions for
+handling images. In addition to the functions for loading
+and storing images that were present in the first part of
+the project, several executables from the first project,
+such as crop and overlay functions, have been abstracted
+to this library to be used in the new executable meme.
+
+
+mem.h
+----------------------------------------------------------
+This library contains the structure and parsing methods for
+handling mem files. Each line is parsed according to its
+first identifier, collecting the memes, meme image files,
+meme text lines, and calls to font.h to parse the font file
+into a font object.
+
+
+font.h
+----------------------------------------------------------
+This library contains the structure and parsing methods for 
+handling font files. Each line is parsed according to its 
+first identifier, collecting the font name, font image file, 
+and each character of the font's dimensions. The library 
+then crops each letter from the specified image file into an
+array of letters, or a font.
+
+
+act.h
+----------------------------------------------------------
+This library contains the structure and parsing methods for 
+handling act files. Each line is parsed according to its first
+identifier, collecting the output filename, meme identifier,
+font identifier, and the given text strings to place on the
+new meme.
